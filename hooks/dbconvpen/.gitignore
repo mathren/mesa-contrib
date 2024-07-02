@@ -1,0 +1,13 @@
+baseline_test/*
+*.org
+*.o
+*.a
+*.data
+*.dat
+*.mod
+*.smod
+*.index
+*LOGS/*
+*photos/*
+scripts/*
+star
