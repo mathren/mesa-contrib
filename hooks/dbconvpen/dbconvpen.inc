@@ -16,15 +16,15 @@
     type(star_info), pointer :: s
     real(dp) :: fraction, Peclet_number, diffusivity    ! f is fraction to compose grad_T = f*grad_ad + (1-f)*grad_rad
     integer :: k
-    logical, parameter :: DEBUG = .FALSE.
+    logical, parameter :: DEBUG = .false.
 
     ierr = 0
     call star_ptr(id, s, ierr)
     if (ierr /= 0) return
 
-    if (s%D_mix(1) .ne. s%D_mix(1)) return  ! To ignore iterations where Dmix and gradT are NaNs
+    if (s%D_mix(1) /= s%D_mix(1)) return  ! To ignore iterations where Dmix and gradT are NaNs
 
-    if (s%num_conv_boundaries .lt. 1) then  ! Is zero at initialisation of the run
+    if (s%num_conv_boundaries <= 1) then  ! Is zero at initialisation of the run
        if (DEBUG) then
           write(*,*) 'runstarex_gradT: skip since there are no convective boundaries'
        end if
@@ -39,7 +39,7 @@
 
        if (Peclet_number >= 100.0_dp) then
           fraction = 1.0_dp
-       else if (Peclet_number .le. 0.01_dp) then
+       else if (Peclet_number <= 0.01_dp) then
           fraction = 0.0_dp
        else
           fraction = (safe_log10(Peclet_number)+2.0_dp)/4.0_dp
@@ -81,7 +81,7 @@
     call star_ptr(id, s, ierr)
     if (ierr /= 0) return
 
-    if ((i .ne. 1) .or. (s%mixing_type(s%nz) .ne. convective_mixing)) then
+    if ((i /= 1) .or. (s%mixing_type(s%nz) /= convective_mixing)) then
        write(*,'(A,i2,A,i2)') 'ERROR: dissipation_balanced_penetration can only be used for core convection, &
             &so the first convective boundary. The routine got called for convective boundary number ',i, &
             &', and the mixing type in the core was', s%mixing_type(s%nz)
@@ -100,7 +100,7 @@
     D0 = s%overshoot_D0(j)
     Delta0 = s%overshoot_Delta0(j)
 
-    if (f < 0.0_dp .OR. f0 <= 0.0_dp .OR. f2 < 0.0_dp) then
+    if (f < 0.0_dp .or. f0 <= 0.0_dp .or. f2 < 0.0_dp) then
        write(*,*) 'ERROR: for extended convective penetration, must set f0 > 0, and f and f2 >= 0'
        write(*,*) 'see description of overshooting in star/defaults/control.defaults'
        ierr = -1
@@ -292,7 +292,7 @@
 
     r_upper_ov=-1
     r_upper_BV=-1
-    k_max_N2comp = MAXLOC(s% brunt_n2_composition_term(:), 1)
+    k_max_N2comp = maxloc(s% brunt_n2_composition_term(:), 1)
     ! Find boundary of convective core, and go inwards by the specified distance (in Hp)
     do k = s% nz, 1, -1
        if (s% mixing_type(k) == convective_mixing) then
