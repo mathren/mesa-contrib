@@ -11,3 +11,9 @@ baseline_test/*
 *photos/*
 scripts/*
 star
+rn
+re
+mk
+clean
+make/*
+src/run.f90
