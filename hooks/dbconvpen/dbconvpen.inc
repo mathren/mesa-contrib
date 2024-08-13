@@ -200,7 +200,7 @@
     call star_eval_conv_bdy_r(s, 1, r_cb, ierr)
     s% ixtra(2) = k
     s% xtra(5) = r_cb
-    s%xtra(1) = s%m(k)
+    s% xtra(1) = s%m(k)
     s% xtra(6) = s%rho(k)
     h = s%scale_height(k)
 
