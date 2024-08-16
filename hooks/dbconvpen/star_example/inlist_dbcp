@@ -3,10 +3,6 @@
 pgstar_flag = .true.
 
 initial_zfracs = 8
-!change_initial_Z = .true.
-!change_initial_Y = .true.
-!new_Z = 0.0142
-!new_Y = 0.276
 
 / ! end of star_job namelist
 
@@ -20,8 +16,13 @@ use_Type2_opacities = .true.
 Zbase = 0.02
 kap_file_prefix = 'OP_a09_nans_removed_by_hand'
 
-cubic_interpolation_in_X = .true.
-cubic_interpolation_in_Z = .true.
+! ------------------------------------------------------
+! Recommended settings for publication quality
+! commented out to speed-up tests
+
+! cubic_interpolation_in_X = .true.
+! cubic_interpolation_in_Z = .true.
+! ------------------------------------------------------
 
 / ! end of kap namelist
 
@@ -31,12 +32,11 @@ cubic_interpolation_in_Z = .true.
 ! when to stop
 max_model_number = 200
 
-initial_mass = 8. ! in Msun units
+initial_mass = 8.0 ! in Msun units
 initial_z = 0.02
 !initial_y = 0.276
 
 ! Mixing
-
 min_D_mix = 100
 set_min_D_mix = .true.
 
@@ -61,44 +61,52 @@ overshoot_f0(1) = 0.005
 overshoot_f(1) = 0.01
 ! overshoot_D0(1) = 0.005
 
-! Atmosphere
-
-atm_option = 'T_tau'
-atm_T_tau_relation = 'Krishna_Swamy'
-atm_T_tau_opacity = 'iterated'
-
-! Wind
-
-hot_wind_scheme = 'Dutch'
-cool_wind_RGB_scheme = 'Dutch'
-cool_wind_AGB_scheme = 'Dutch'
-Dutch_scaling_factor = 0.8d0
 
 ! Solver
 
 energy_eqn_option = 'dedt'
-use_gold_tolerances = .true.
+
+! ------------------------------------------------------
+! Recommended settings for publication quality
+! commented out to speed-up tests
+
+! ! Atmosphere
+
+! atm_option = 'T_tau'
+! atm_T_tau_relation = 'Krishna_Swamy'
+! atm_T_tau_opacity = 'iterated'
+
+! ! Wind
+
+! hot_wind_scheme = 'Dutch'
+! cool_wind_RGB_scheme = 'Dutch'
+! cool_wind_AGB_scheme = 'Dutch'
+! Dutch_scaling_factor = 0.8d0
+
+! ! Solver
+! use_gold_tolerances = .false.
 
 ! Resolution
 
-max_allowed_nz = 100000
-mesh_delta_coeff = 0.4
-time_delta_coeff = 0.5
+! max_allowed_nz = 100000
+! mesh_delta_coeff = 0.4
+! time_delta_coeff = 0.5
 
-varcontrol_target = 1d-4
-min_allowed_varcontrol_target = 1d-5
+! varcontrol_target = 1d-4
+! min_allowed_varcontrol_target = 1d-5
 
-num_cells_for_smooth_gradL_composition_term = 10
-threshold_for_smooth_gradL_composition_term = 0.02
+! num_cells_for_smooth_gradL_composition_term = 10
+! threshold_for_smooth_gradL_composition_term = 0.02
 
-num_cells_for_smooth_brunt_B = 10
-threshold_for_smooth_brunt_B = 0.1
+! num_cells_for_smooth_brunt_B = 10
+! threshold_for_smooth_brunt_B = 0.1
 
-! extra mesh controls
-x_ctrl(1) = 0.1  ! xtra_dist_below
-x_ctrl(2) = 0.1  ! xtra_dist_above_ov
-x_ctrl(3) = 0.1  ! xtra_dist_above_bv
-x_ctrl(4) = 0.15 ! xtra_coeff_mesh
+! ! extra mesh controls
+! x_ctrl(1) = 0.1  ! xtra_dist_below
+! x_ctrl(2) = 0.1  ! xtra_dist_above_ov
+! x_ctrl(3) = 0.1  ! xtra_dist_above_bv
+! x_ctrl(4) = 0.15 ! xtra_coeff_mesh
+! ------------------------------------------------------
 
 / ! end of controls namelist
 
